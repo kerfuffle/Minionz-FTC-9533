@@ -1,6 +1,7 @@
 package com.minions.gamecode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 /**
  * Created by doug on 11/15/2015.
@@ -34,6 +35,11 @@ public class ArcadeDrive extends BaseRobotDrive {
 
     @Override
     public void switchDirection() {
+
+    }
+
+    @Override
+    public void drive(Gamepad gamepad) {
 
     }
 }

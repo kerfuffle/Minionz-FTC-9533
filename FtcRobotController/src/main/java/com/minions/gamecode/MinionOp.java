@@ -84,7 +84,19 @@ public class MinionOp extends OpMode {
 
             @Override
             public void buttonReleased() {
+                tankDrive.reduceMaxSpeed();
+            }
+        }));
 
+        gamepadHelper1.setRightBumper(new Button(true, new IButtonChanged() {
+            @Override
+            public void buttonPressed() {
+
+            }
+
+            @Override
+            public void buttonReleased() {
+                tankDrive.increaseMaxSpeed();
             }
         }));
 
@@ -99,5 +111,7 @@ public class MinionOp extends OpMode {
     @Override
     public void loop() {
         float etime = t.GetETime();
+
+        this.tankDrive.drive(gamepad1);
     }
 }

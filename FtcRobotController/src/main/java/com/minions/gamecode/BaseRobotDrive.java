@@ -3,6 +3,7 @@ package com.minions.gamecode;
 import com.minions.gamecode.DoNotRegister;
 import com.minions.utils.Direction;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -57,4 +58,6 @@ public abstract class BaseRobotDrive {
             setDirection(Direction.FORWARD);
         }
     }
+
+    public abstract void drive(Gamepad gamepad);
 }
