@@ -53,8 +53,3 @@ public class Button {
 
 }
 
-public interface IButtonChanged {
-    //void buttonState(boolean buttonPressed);
-    void buttonPressed();
-    void buttonReleased();
-}

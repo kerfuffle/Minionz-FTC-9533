@@ -31,12 +31,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
+import com.minions.gamecode.Name;
+import com.qualcomm.ftcrobotcontroller.RC;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import dalvik.system.DexFile;
 
 /**
  * Register Op Modes
  */
+@DoNotRegister
 public class FtcOpModeRegister implements OpModeRegister {
 
   /**
@@ -63,12 +73,12 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register ("PushBotAuto", PushBotAuto.class);
     manager.register ("PushBotManual", PushBotManual.class);
 
-
+    registerOpModes("gamecode", manager);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
-    manager.register("MR Gyro Test", MRGyroTest.class);
+    //manager.register("MR Gyro Test", MRGyroTest.class);
 
     //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
     //manager.register("ColorSensorDriver", ColorSensorDriver.class);
@@ -96,5 +106,41 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("PushBotDriveTouch", PushBotDriveTouch.java);
     //manager.register("PushBotIrSeek", PushBotIrSeek.java);
     //manager.register("PushBotSquare", PushBotSquare.java);
+  }
+
+  public void registerOpModes(String packageName, OpModeManager manager) {
+    int counter = 0;
+
+    try{
+      String packageCodePath = RC.c.getPackageCodePath();
+      DexFile df = new DexFile(packageCodePath);
+
+      for(Enumeration<String> iter = df.entries();iter.hasMoreElements() && counter < 15;){
+        String className = iter.nextElement();
+
+        if(className.contains(packageName) && !className.contains("$") && !Class.forName(className).isAnnotationPresent(DoNotRegister.class)) {
+          Class opMode = Class.forName(className);
+
+
+          if (opMode.isAnnotationPresent(Name.class)) {
+            manager.register(((Name) opMode.getAnnotation(Name.class)).value(), Class.forName(className));
+            counter++;
+          } else {
+            counter++;
+            //Log.i("Class Name", className);
+            manager.register(className.substring(className.lastIndexOf('.') + 1), Class.forName(className));
+
+          }
+        }
+
+      }
+
+    }catch(IOException e){
+
+    }catch (ClassNotFoundException e){
+
+    }
+
+
   }
 }

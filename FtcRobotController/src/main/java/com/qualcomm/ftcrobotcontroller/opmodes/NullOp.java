@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -42,6 +43,7 @@ import java.util.Date;
  * <p>
  *Enables control of the robot via the gamepad
  */
+@DoNotRegister
 public class NullOp extends OpMode {
 
   private String startDate;

@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.IrSeekerSensor;
@@ -42,6 +43,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * A simple example of a linear op mode that shows how to change the I2C address.
  */
+@DoNotRegister
 public class LinearI2cAddressChange extends LinearOpMode {
 
   public static final int ADDRESS_SET_NEW_I2C_ADDRESS = 0x70;

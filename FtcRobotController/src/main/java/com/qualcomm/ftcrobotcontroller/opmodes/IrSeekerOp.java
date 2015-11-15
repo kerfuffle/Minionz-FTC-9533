@@ -30,6 +30,7 @@
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,6 +46,7 @@ import com.qualcomm.robotcore.hardware.IrSeekerSensor;
  * Turn on the IR beacon. The robot will now follow the IR beacon. <br>
  * To stop the robot, turn the IR beacon off. <br>
  */
+@DoNotRegister
 public class IrSeekerOp extends OpMode {
 
   final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster

@@ -30,11 +30,12 @@
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CompassSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+@DoNotRegister
 public class CompassCalibration extends OpMode {
 
   // how long to hold before the next action

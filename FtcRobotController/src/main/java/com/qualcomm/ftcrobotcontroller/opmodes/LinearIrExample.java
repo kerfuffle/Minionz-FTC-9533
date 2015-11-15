@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IrSeekerSensor;
@@ -38,6 +39,7 @@ import com.qualcomm.robotcore.hardware.IrSeekerSensor;
 /**
  * A simple example of a linear op mode that will approach an IR beacon
  */
+@DoNotRegister
 public class LinearIrExample extends LinearOpMode {
 
   final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster

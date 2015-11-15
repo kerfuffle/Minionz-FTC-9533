@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.LightSensor;
@@ -41,6 +42,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * <p>
  * Enables control of the robot via the gamepad
  */
+@DoNotRegister
 public class K9Line extends OpMode {
 
 	final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster

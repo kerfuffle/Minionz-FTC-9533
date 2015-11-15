@@ -1,24 +1,32 @@
-package com.minions.utils;
+package com.minions.gamecode;
 
+import com.minions.gamecode.DoNotRegister;
+import com.minions.utils.Direction;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
 
 /**
- * Created by doug on 11/8/2015.
+ * Created by doug on 11/14/2015.
  */
-public class TankDrive {
+@DoNotRegister
+public abstract class BaseRobotDrive {
+    protected boolean reverse;
+    protected DcMotor motorLeft, motorRight;
+    protected float maxSpeed;
+    protected Direction direction;
 
-    boolean reverse;
-    float maxSpeed;
-    DcMotor motorLeft, motorRight;
-    Direction direction;
-
-    public TankDrive(DcMotor motorLeft, DcMotor motorRight){
+    public BaseRobotDrive(DcMotor motorLeft, DcMotor motorRight){
         this.motorLeft = motorLeft;
         this.motorRight = motorRight;
 
         this.motorLeft.setDirection(DcMotor.Direction.REVERSE);
+    }
+
+    public void increaseMaxSpeed(){
+        this.setSpeed(this.getSpeed() + 0.1f);
+    }
+    public void reduceMaxSpeed(){
+        this.setSpeed(this.getSpeed() - 0.1f);
     }
 
     public void setDirection(Direction direction){
@@ -36,31 +44,17 @@ public class TankDrive {
         }
 
     }
-
-    public void DriveTank(Gamepad gamepad) {
-
-        float left = -gamepad.left_stick_y;
-        float right = -gamepad.right_stick_y;
-
+    public float getSpeed() {
+        return  this.maxSpeed;
     }
-
     public void setSpeed(float speed){
         this.maxSpeed = Range.clip(speed, 0, 1);
     }
-
     public void switchDirection(){
         if(this.direction == Direction.FORWARD) {
             setDirection(Direction.REVERSE);
         } else {
             setDirection(Direction.FORWARD);
-        }
-    }
-
-    public static enum Direction {
-        FORWARD,
-        REVERSE;
-
-        private Direction() {
         }
     }
 }

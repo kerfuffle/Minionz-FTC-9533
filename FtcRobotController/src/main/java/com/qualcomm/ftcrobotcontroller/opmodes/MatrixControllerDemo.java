@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.DoNotRegister;
 import com.qualcomm.hardware.MatrixDcMotorController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,6 +46,7 @@ import java.util.Set;
 /**
  * A simple example of all motors and servos oscillating
  */
+@DoNotRegister
 public class MatrixControllerDemo extends OpMode {
 
     private ElapsedTime motorOscTimer = new ElapsedTime(0);
