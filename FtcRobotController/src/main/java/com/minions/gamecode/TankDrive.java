@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by doug on 11/8/2015.
  */
+@DoNotRegister
 public class TankDrive extends BaseRobotDrive {
 
 
@@ -29,24 +30,6 @@ public class TankDrive extends BaseRobotDrive {
 
 
     }
-
-
-    public void DriveTank(Gamepad gamepad) {
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
 }
 
 

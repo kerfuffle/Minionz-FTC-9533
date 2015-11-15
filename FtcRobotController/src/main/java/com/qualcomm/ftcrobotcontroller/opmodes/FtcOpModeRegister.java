@@ -34,6 +34,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.minions.gamecode.DoNotRegister;
 import com.minions.gamecode.Name;
 import com.qualcomm.ftcrobotcontroller.RC;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -68,10 +69,10 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("NullOp", NullOp.class);
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);
-    manager.register("K9TeleOp", K9TeleOp.class);
-    manager.register("K9Line", K9Line.class);
-    manager.register ("PushBotAuto", PushBotAuto.class);
-    manager.register ("PushBotManual", PushBotManual.class);
+//    manager.register("K9TeleOp", K9TeleOp.class);
+//    manager.register("K9Line", K9Line.class);
+//    manager.register ("PushBotAuto", PushBotAuto.class);
+//    manager.register ("PushBotManual", PushBotManual.class);
 
     registerOpModes("gamecode", manager);
 
@@ -121,15 +122,17 @@ public class FtcOpModeRegister implements OpModeRegister {
         if(className.contains(packageName) && !className.contains("$") && !Class.forName(className).isAnnotationPresent(DoNotRegister.class)) {
           Class opMode = Class.forName(className);
 
+          if(opMode.isAssignableFrom(OpMode.class)) {
 
-          if (opMode.isAnnotationPresent(Name.class)) {
-            manager.register(((Name) opMode.getAnnotation(Name.class)).value(), Class.forName(className));
-            counter++;
-          } else {
-            counter++;
-            //Log.i("Class Name", className);
-            manager.register(className.substring(className.lastIndexOf('.') + 1), Class.forName(className));
+            if (opMode.isAnnotationPresent(Name.class)) {
+              manager.register(((Name) opMode.getAnnotation(Name.class)).value(), Class.forName(className));
+              counter++;
+            } else {
+              counter++;
+              //Log.i("Class Name", className);
+              manager.register(className.substring(className.lastIndexOf('.') + 1), Class.forName(className));
 
+            }
           }
         }
 

@@ -4,6 +4,7 @@ import com.minions.utils.Button;
 import com.minions.utils.Direction;
 import com.minions.utils.GamepadHelper;
 import com.minions.utils.IButtonChanged;
+import com.minions.utils.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -14,6 +15,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class MinionOp extends OpMode {
 
     GamepadHelper gamepadHelper1;
+    GamepadHelper gamepadHelper2;
+
     Timer t = new Timer();
     TankDrive tankDrive;
 
@@ -102,11 +105,38 @@ public class MinionOp extends OpMode {
 
 
 
-        this.gamepad1 = new Gamepad(gamepadHelper1);
+        this.gamepad1 = gamepadHelper1.createGamepad();
 
 
     }
 
+    private void configureGamepad2(){
+        gamepadHelper2 = new GamepadHelper();
+        gamepadHelper2.setButtonA(new Button(true, new IButtonChanged() {
+            @Override
+            public void buttonPressed() {
+
+            }
+
+            @Override
+            public void buttonReleased() {
+                //raise tilt body
+            }
+        }));
+        gamepadHelper2.setButtonB(new Button(true, new IButtonChanged() {
+            @Override
+            public void buttonPressed() {
+
+            }
+
+            @Override
+            public void buttonReleased() {
+                //lower tilt body
+            }
+        }));
+
+        this.gamepad2 = gamepadHelper2.createGamepad();
+    }
 
     @Override
     public void loop() {

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 /**
  * Created by doug on 11/15/2015.
  */
-
+@DoNotRegister
 public class ArcadeDrive extends BaseRobotDrive {
 
     public ArcadeDrive(DcMotor motorLeft, DcMotor motorRight){

@@ -64,6 +64,9 @@ public class GamepadHelper
         }
     }
 
+    public Gamepad createGamepad(){
+        return new Gamepad(this);
+    }
 }
 
 
