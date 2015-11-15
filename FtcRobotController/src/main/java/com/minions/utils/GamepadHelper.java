@@ -1,6 +1,10 @@
 package com.minions.utils;
 
+import android.widget.Toast;
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.robocol.Telemetry;
 
 
 public class GamepadHelper
@@ -13,8 +17,13 @@ public class GamepadHelper
     Button right_bumper = null;
     Button left_bumper = null;
 
-    public GamepadHelper(){
+    Telemetry telemetry;
+    public GamepadHelper(Telemetry telemetry){
+        //Toast t = new Toast();
 
+
+
+        this.telemetry = telemetry;
 //        b = new Button();
 //        x = new Button();
 //        y = new Button();
@@ -44,6 +53,9 @@ public class GamepadHelper
 
 
     public void gamepadChanged(Gamepad gamepad) {
+
+        telemetry.addData("GamepadHelper", "gamepadChanged");
+
         if(a != null) {
             a.handleButton(gamepad.a);
         }

@@ -28,34 +28,39 @@ public class MinionOp extends OpMode {
         );
 
         this.tankDrive.setDirection(Direction.FORWARD);
+        this.tankDrive.setSpeed(0.5f);
+
         configureGamepad1();
+        configureGamepad2();
+
         t.GetETime();
     }
 
 
     private void configureGamepad1(){
-        gamepadHelper1 = new GamepadHelper();
+        gamepadHelper1 = new GamepadHelper(telemetry);
 
-        Button a = new Button(true, new IButtonChanged() {
-                @Override
-                public void buttonPressed() {
 
-                }
-
-                @Override
-                public void buttonReleased() {
-                    tankDrive.switchDirection();
-                }
+        gamepadHelper1.setButtonA(new Button(true, new IButtonChanged() {
+            @Override
+            public void buttonPressed() {
+                telemetry.addData("ButtonHelper", "Button A pressed");
             }
-        );
-        gamepadHelper1.setButtonA(a);
+
+            @Override
+            public void buttonReleased() {
+                telemetry.addData("ButtonHelper", "Button A released");
+                tankDrive.switchDirection();
+            }
+        }
+        ));
 
 
         //set tank to full speed
         Button y = new Button(true, new IButtonChanged() {
             @Override
             public void buttonPressed() {
-
+                telemetry.addData("ButtonHelper", "Button Y pressed");
             }
 
             @Override
@@ -74,7 +79,7 @@ public class MinionOp extends OpMode {
 
             @Override
             public void buttonReleased() {
-                tankDrive.setSpeed(1/10);
+                tankDrive.setSpeed(5/10);
             }
         });
         gamepadHelper1.setButtonX(x);
@@ -111,7 +116,7 @@ public class MinionOp extends OpMode {
     }
 
     private void configureGamepad2(){
-        gamepadHelper2 = new GamepadHelper();
+        gamepadHelper2 = new GamepadHelper(telemetry);
         gamepadHelper2.setButtonA(new Button(true, new IButtonChanged() {
             @Override
             public void buttonPressed() {
@@ -142,6 +147,14 @@ public class MinionOp extends OpMode {
     public void loop() {
         float etime = t.GetETime();
 
+        this.gamepadHelper1.gamepadChanged(gamepad1);
+        this.gamepadHelper2.gamepadChanged(gamepad2);
+
+
+        telemetry.addData("Text", "*** Robot Data***");
         this.tankDrive.drive(gamepad1);
+        telemetry.addData("ETime", Float.toString(etime));
+
+
     }
 }
