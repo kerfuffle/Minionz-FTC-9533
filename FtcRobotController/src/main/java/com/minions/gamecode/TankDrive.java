@@ -1,6 +1,7 @@
 package com.minions.gamecode;
 
 import com.minions.gamecode.BaseRobotDrive;
+import com.minions.utils.Direction;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
@@ -25,9 +26,13 @@ public class TankDrive extends BaseRobotDrive {
         left = Range.clip(left, this.maxSpeed*-1, this.maxSpeed);
         right = Range.clip(right, this.maxSpeed*-1, this.maxSpeed);
 
-        this.motorRight.setPower(right);
-        this.motorLeft.setPower(left);
-
+        if(this.direction == Direction.FORWARD) {
+            this.motorRight.setPower(right);
+            this.motorLeft.setPower(left);
+        } else {
+            this.motorRight.setPower(left);
+            this.motorLeft.setPower(right);
+        }
 
     }
 }
