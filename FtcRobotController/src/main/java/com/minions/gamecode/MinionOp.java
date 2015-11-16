@@ -14,24 +14,30 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @Name("Minion Tele-Op")
 public class MinionOp extends OpMode {
 
+    private final String HARDWARE_PlatformMotor = "platformMotor";
+    private final String HARDWARE_LeftMotor = "leftMotor";
+    private final String HARDWARE_RightMotor = "rightMotor";
+
     GamepadHelper gamepadHelper1;
     GamepadHelper gamepadHelper2;
 
     Timer t = new Timer();
     TankDrive tankDrive;
+    Platform platform;
 
     @Override
     public void init() {
         tankDrive = new TankDrive(
-                hardwareMap.dcMotor.get("leftMotor"),
-                hardwareMap.dcMotor.get("rightMotor")
+                hardwareMap.dcMotor.get(HARDWARE_LeftMotor),
+                hardwareMap.dcMotor.get(HARDWARE_RightMotor)
         );
+        //platform = new Platform(hardwareMap.dcMotor.get(HARDWARE_PlatformMotor));
 
         this.tankDrive.setDirection(Direction.FORWARD);
         this.tankDrive.setSpeed(0.5f);
 
         configureGamepad1();
-        configureGamepad2();
+        //configureGamepad2();
 
         t.GetETime();
     }
@@ -117,26 +123,28 @@ public class MinionOp extends OpMode {
 
     private void configureGamepad2(){
         gamepadHelper2 = new GamepadHelper(telemetry);
-        gamepadHelper2.setButtonA(new Button(true, new IButtonChanged() {
+        gamepadHelper2.setLeftBumper(new Button(true, new IButtonChanged() {
             @Override
             public void buttonPressed() {
-
+                telemetry.addData("Platform", "Platform Raising...");
+                platform.lower(0.8f);
             }
 
             @Override
             public void buttonReleased() {
-                //raise tilt body
+
             }
         }));
-        gamepadHelper2.setButtonB(new Button(true, new IButtonChanged() {
+        gamepadHelper2.setRightBumper(new Button(true, new IButtonChanged() {
             @Override
             public void buttonPressed() {
-
+                telemetry.addData("Platform", "Platform Lowering...");
+                platform.raise(0.8f);
             }
 
             @Override
             public void buttonReleased() {
-                //lower tilt body
+
             }
         }));
 
@@ -148,7 +156,7 @@ public class MinionOp extends OpMode {
         float etime = t.GetETime();
 
         this.gamepadHelper1.gamepadChanged(gamepad1);
-        this.gamepadHelper2.gamepadChanged(gamepad2);
+        //this.gamepadHelper2.gamepadChanged(gamepad2);
 
 
         telemetry.addData("Text", "*** Robot Data***");

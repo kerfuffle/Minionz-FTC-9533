@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.minions.gamecode.Autonomous;
 import com.minions.gamecode.DoNotRegister;
 import com.minions.gamecode.MinionOp;
 import com.minions.gamecode.Name;
@@ -77,6 +78,7 @@ public class FtcOpModeRegister implements OpModeRegister {
 
     //registerOpModes("gamecode", manager);
     manager.register("Minions", MinionOp.class);
+    manager.register("Autonomous", Autonomous.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.
