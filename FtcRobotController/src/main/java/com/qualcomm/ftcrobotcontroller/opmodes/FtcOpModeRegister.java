@@ -35,6 +35,7 @@ import com.minions.gamecode.Autonomous;
 import com.minions.gamecode.DoNotRegister;
 import com.minions.gamecode.MinionOp;
 import com.minions.gamecode.Name;
+import com.minions.gamecode.ScratchOp;
 import com.qualcomm.ftcrobotcontroller.RC;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
@@ -79,6 +80,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     //registerOpModes("gamecode", manager);
     manager.register("Minions", MinionOp.class);
     manager.register("Autonomous", Autonomous.class);
+    manager.register("Scratch", ScratchOp.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.

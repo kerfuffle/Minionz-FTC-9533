@@ -14,9 +14,11 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @Name("Minion Tele-Op")
 public class MinionOp extends OpMode {
 
-    private final String HARDWARE_PlatformMotor = "platformMotor";
+     //private final String HARDWARE_PlatformMotor = "platformMotor";
     private final String HARDWARE_LeftMotor = "leftMotor";
     private final String HARDWARE_RightMotor = "rightMotor";
+    private final String HARDWARE_LeftArm = "leftArmServo";
+    private final String HARDWARE_RightArm = "rightArmServo";
 
     GamepadHelper gamepadHelper1;
     GamepadHelper gamepadHelper2;
@@ -24,6 +26,7 @@ public class MinionOp extends OpMode {
     Timer t = new Timer();
     TankDrive tankDrive;
     Platform platform;
+    Arm leftArm, rightArm;
 
     @Override
     public void init() {
@@ -31,6 +34,9 @@ public class MinionOp extends OpMode {
                 hardwareMap.dcMotor.get(HARDWARE_LeftMotor),
                 hardwareMap.dcMotor.get(HARDWARE_RightMotor)
         );
+
+
+
         //platform = new Platform(hardwareMap.dcMotor.get(HARDWARE_PlatformMotor));
 
         this.tankDrive.setDirection(Direction.FORWARD);
