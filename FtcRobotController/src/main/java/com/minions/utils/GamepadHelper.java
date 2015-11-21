@@ -17,6 +17,9 @@ public class GamepadHelper
     Button right_bumper = null;
     Button left_bumper = null;
 
+    Button dpad_up = null;
+    Button dpad_down = null;
+
     Telemetry telemetry;
     public GamepadHelper(Telemetry telemetry){
         //Toast t = new Toast();
@@ -51,6 +54,8 @@ public class GamepadHelper
     }
 
 
+    public void setDPadUp(Button button) { this.dpad_down = button;}
+    public void setDPadDown(Button button) { this.dpad_up = button;}
 
     public void gamepadChanged(Gamepad gamepad) {
 
@@ -73,6 +78,13 @@ public class GamepadHelper
         }
         if(left_bumper != null) {
             left_bumper.handleButton(gamepad.left_bumper);
+        }
+
+        if(dpad_down != null){
+            dpad_down.handleButton(gamepad.dpad_down);
+        }
+        if(dpad_up != null){
+            dpad_up.handleButton(gamepad.dpad_up);
         }
     }
 

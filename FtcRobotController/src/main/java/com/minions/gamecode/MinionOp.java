@@ -19,14 +19,19 @@ public class MinionOp extends OpMode {
     private final String HARDWARE_RightMotor = "rightMotor";
     private final String HARDWARE_LeftArm = "leftArmServo";
     private final String HARDWARE_RightArm = "rightArmServo";
+    private final String HARDWARE_LiftMotor = "liftMotor";
+    private final String HARDWARE_ExtendMotor = "extendMotor";
+
+
 
     GamepadHelper gamepadHelper1;
-    GamepadHelper gamepadHelper2;
+    //GamepadHelper gamepadHelper2;
 
     Timer t = new Timer();
     TankDrive tankDrive;
-    Platform platform;
+//    Platform platform;
     Arm leftArm, rightArm;
+    Lifter lifter;
 
     @Override
     public void init() {
@@ -35,7 +40,11 @@ public class MinionOp extends OpMode {
                 hardwareMap.dcMotor.get(HARDWARE_RightMotor)
         );
 
+        //lifter = new Lifter(hardwareMap.dcMotor.get(HARDWARE_LiftMotor), hardwareMap.dcMotor.get(HARDWARE_ExtendMotor));
 
+
+        leftArm = new Arm(hardwareMap.servo.get(HARDWARE_LeftArm), 0.1f, 0.85f, true, this.telemetry);
+        rightArm = new Arm(hardwareMap.servo.get(HARDWARE_RightArm), 0.1f, 0.85f, false, this.telemetry);
 
         //platform = new Platform(hardwareMap.dcMotor.get(HARDWARE_PlatformMotor));
 
@@ -127,35 +136,62 @@ public class MinionOp extends OpMode {
 
     }
 
-    private void configureGamepad2(){
-        gamepadHelper2 = new GamepadHelper(telemetry);
-        gamepadHelper2.setLeftBumper(new Button(true, new IButtonChanged() {
-            @Override
-            public void buttonPressed() {
-                telemetry.addData("Platform", "Platform Raising...");
-                platform.lower(0.8f);
-            }
-
-            @Override
-            public void buttonReleased() {
-
-            }
-        }));
-        gamepadHelper2.setRightBumper(new Button(true, new IButtonChanged() {
-            @Override
-            public void buttonPressed() {
-                telemetry.addData("Platform", "Platform Lowering...");
-                platform.raise(0.8f);
-            }
-
-            @Override
-            public void buttonReleased() {
-
-            }
-        }));
-
-        this.gamepad2 = gamepadHelper2.createGamepad();
-    }
+//    private void configureGamepad2(){
+//        gamepadHelper2 = new GamepadHelper(telemetry);
+//        gamepadHelper2.setLeftBumper(new Button(true, new IButtonChanged() {
+//            @Override
+//            public void buttonPressed() {
+//                telemetry.addData("Arm", "Arm retracting...");
+//                //platform.lower(0.8f);
+//                lifter.RetractArm();
+//            }
+//
+//            @Override
+//            public void buttonReleased() {
+//                lifter.StopExtendRetract();
+//            }
+//        }));
+//        gamepadHelper2.setRightBumper(new Button(true, new IButtonChanged() {
+//            @Override
+//            public void buttonPressed() {
+//                telemetry.addData("Arm", "Arm extending...");
+//                //platform.raise(0.8f);
+//                lifter.ExtendArm();
+//            }
+//
+//            @Override
+//            public void buttonReleased() {
+//                lifter.StopExtendRetract();
+//            }
+//        }));
+//
+//
+//        gamepadHelper2.setDPadDown(new Button(true, new IButtonChanged() {
+//            @Override
+//            public void buttonPressed() {
+//                //lower arm
+//
+//            }
+//
+//            @Override
+//            public void buttonReleased() {
+//                //stop lower arm
+//            }
+//        }));
+//
+//        gamepadHelper2.setDPadUp(new Button(true, new IButtonChanged() {
+//            @Override
+//            public void buttonPressed() {
+//                //raise arm
+//            }
+//
+//            @Override
+//            public void buttonReleased() {
+//                //stop raise arm
+//            }
+//        }));
+//        this.gamepad2 = gamepadHelper2.createGamepad();
+//    }
 
     @Override
     public void loop() {
@@ -168,6 +204,10 @@ public class MinionOp extends OpMode {
         telemetry.addData("Text", "*** Robot Data***");
         this.tankDrive.drive(gamepad1);
         telemetry.addData("ETime", Float.toString(etime));
+
+
+        this.leftArm.setPosition(gamepad2);
+        this.rightArm.setPosition(gamepad2);
 
 
     }
